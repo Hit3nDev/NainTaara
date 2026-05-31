@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nain Taara Welfare Foundation – Restoring Sight. Transforming Lives.</title>
+  <title>[LIGHT THEME] Nain Taara Welfare Foundation – Restoring Sight. Transforming Lives.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -616,25 +616,103 @@
 
     /* TEAM */
     #team { background: #f5f2ec; }
-    .team-inner { max-width: 72rem; margin: 0 auto; }
-    .team-header { text-align: center; margin-bottom: 2.5rem; }
+    /* ── TEAM ── */
+    #team { background: #fff; }
+    .team-inner { max-width: 78rem; margin: 0 auto; }
+    .team-header { text-align: center; margin-bottom: 3.5rem; }
     .team-header h2 { font-size: clamp(1.6rem, 3.5vw, 3rem); font-weight: 400; }
     .team-header h2 em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--orange-light); }
-    .team-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-    @media(min-width:640px){ .team-grid { grid-template-columns: repeat(2,1fr); } }
-    @media(min-width:900px){ .team-grid { grid-template-columns: repeat(3,1fr); } }
-    .team-card { background: #ffffff; border-radius: 1.25rem; padding: 2rem; text-align: center; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .team-grid { display: grid; grid-template-columns: 1fr; gap: 0; border: 1px solid rgba(26,18,8,0.09); border-radius: 1.5rem; overflow: hidden; }
+    @media(min-width:768px){ .team-grid { grid-template-columns: repeat(3,1fr); } }
+    .team-card {
+      padding: 2.8rem 2.5rem 2.8rem;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.25s;
+      position: relative;
+      border-bottom: 1px solid rgba(26,18,8,0.08);
+    }
+    @media(min-width:768px){
+      .team-card { border-bottom: none; border-right: 1px solid rgba(26,18,8,0.08); }
+      .team-card:last-child { border-right: none; }
+    }
+    .team-card:hover { background: #faf8f4; }
     .team-card.visible { opacity: 1; transform: translateY(0); }
-    .team-avatar { width: 5.5rem; height: 5.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--orange)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: #fff; margin: 0 auto 1.2rem; position: relative; overflow: hidden; border: 3px solid rgba(192,90,24,0.2); box-shadow: 0 4px 16px rgba(192,90,24,0.15); }
+    .team-card-top { display: flex; align-items: flex-start; gap: 1.4rem; margin-bottom: 1.6rem; }
+    .team-avatar {
+      width: 5rem; height: 5rem; border-radius: 50%;
+      background: linear-gradient(135deg, #2A3A54 0%, #C05A18 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; font-weight: 800; color: #fff;
+      position: relative; overflow: hidden; flex-shrink: 0;
+      border: 2.5px solid rgba(192,90,24,0.3);
+      box-shadow: 0 6px 24px rgba(192,90,24,0.2), 0 0 0 4px rgba(192,90,24,0.07);
+      cursor: pointer;
+    }
     .team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .team-avatar .avatar-upload-hint { position: absolute; inset: 0; border-radius: 50%; background: rgba(0,0,0,0.45); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; cursor: pointer; gap: 0.2rem; }
     .team-avatar:hover .avatar-upload-hint { opacity: 1; }
     .team-avatar .avatar-upload-hint span { font-size: 1.1rem; }
     .team-avatar .avatar-upload-hint p { font-size: 0.5rem; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
-    .team-avatar-initials { position: relative; z-index: 1; font-size: 1.5rem; font-weight: 800; }
-    .team-name { font-size: 1rem; font-weight: 700; color: #1a1208; margin-bottom: 0.25rem; }
-    .team-role { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.8rem; }
-    .team-bio { font-size: 0.72rem; line-height: 1.7; color: rgba(26,18,8,0.5); }
+    .team-avatar-initials { position: relative; z-index: 1; font-size: 1.15rem; font-weight: 800; }
+    .team-card-meta { display: flex; flex-direction: column; justify-content: center; gap: 0.3rem; padding-top: 0.2rem; }
+    .team-name { font-size: 1rem; font-weight: 700; color: #1a1208; line-height: 1.2; }
+    .team-role { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+    .team-divider { width: 2rem; height: 1px; background: rgba(192,90,24,0.3); margin-bottom: 1rem; }
+    .team-bio { font-size: 0.74rem; line-height: 1.8; color: rgba(26,18,8,0.5); }
+    .team-card-num { position: absolute; top: 1.5rem; right: 1.8rem; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; color: rgba(26,18,8,0.12); }
+
+    /* ── CERTIFICATES ── */
+    #certificates { background: #f5f2ec; }
+    .cert-inner { max-width: 72rem; margin: 0 auto; }
+    .cert-header { text-align: center; margin-bottom: 3rem; }
+    .cert-header h2 { font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 400; }
+    .cert-header h2 em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--orange-light); }
+    .cert-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; }
+    @media(min-width:640px){ .cert-grid { grid-template-columns: repeat(4,1fr); } }
+    .cert-card {
+      background: #fff;
+      padding: 2rem 1.6rem 1.8rem;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(26,18,8,0.07);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+      position: relative; overflow: hidden;
+    }
+    .cert-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--orange);
+      transition: width 0.35s ease;
+    }
+    .cert-card:hover::after { width: 100%; }
+    .cert-card:hover { background: #faf8f4; border-color: rgba(192,90,24,0.2); box-shadow: 0 8px 32px rgba(192,90,24,0.08); }
+    .cert-card.visible { opacity: 1; transform: translateY(0); }
+    .cert-icon-wrap {
+      width: 2.6rem; height: 2.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(192,90,24,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange);
+      background: rgba(192,90,24,0.05);
+      flex-shrink: 0;
+    }
+    .cert-icon-wrap svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .cert-text { display: flex; flex-direction: column; gap: 0.3rem; }
+    .cert-name { font-size: 0.82rem; font-weight: 700; color: #1a1208; }
+    .cert-status { font-size: 0.6rem; color: rgba(26,18,8,0.38); letter-spacing: 0.07em; line-height: 1.5; }
+    .cert-status.pending { color: var(--orange-light); }
+    .cert-badge {
+      margin-top: auto;
+      font-size: 0.5rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.2rem 0.55rem; border-radius: 9999px;
+      border: 1px solid rgba(26,18,8,0.15);
+      color: rgba(26,18,8,0.4);
+      align-self: flex-start;
+    }
+    .cert-badge.active { border-color: rgba(192,90,24,0.3); color: var(--orange); background: rgba(192,90,24,0.06); }
+    .cert-badge.pending-b { border-color: rgba(192,90,24,0.2); color: var(--orange-light); }
 
     /* IMPACT TRIO */
     .impact-trio-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 72rem; margin: 0 auto; }
@@ -754,11 +832,36 @@
     .how-text h2 em { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--orange-light); }
     .how-text > p { font-size: 0.8rem; line-height: 1.8; color: rgba(26,18,8,0.5); margin-bottom: 1.5rem; }
     .steps { counter-reset: step; }
-    .step { display: flex; gap: 1.2rem; margin-bottom: 1.4rem; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    /* ── PROCESS STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+    .step {
+      display: flex; gap: 1.6rem; align-items: flex-start;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(26,18,8,0.07);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      position: relative;
+    }
+    .step:last-child { border-bottom: none; }
     .step.visible { opacity: 1; transform: translateY(0); }
-    .step-num { font-size: 0.62rem; font-weight: 700; color: var(--orange); letter-spacing: 0.1em; min-width: 1.8rem; padding-top: 0.15rem; }
-    .step-body h4 { font-size: 0.82rem; font-weight: 700; color: #1a1208; margin-bottom: 0.25rem; }
-    .step-body p { font-size: 0.7rem; color: rgba(26,18,8,0.45); line-height: 1.5; margin: 0; }
+    .step-icon-bubble {
+      width: 4rem; height: 4rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative;
+    }
+    .step-icon-bubble svg.step-icon-art {
+      width: 2.2rem; height: 2.2rem;
+      position: relative; z-index: 1;
+    }
+    /* Per-step bubble colours */
+    .step:nth-child(1) .step-icon-bubble { background: rgba(192,90,24,0.12); }
+    .step:nth-child(2) .step-icon-bubble { background: rgba(42,58,84,0.1); }
+    .step:nth-child(3) .step-icon-bubble { background: rgba(192,90,24,0.08); }
+    .step:nth-child(4) .step-icon-bubble { background: rgba(42,58,84,0.08); }
+    .step-content { flex: 1; padding-top: 0.25rem; }
+    .step-num { font-size: 0.52rem; font-weight: 700; color: var(--orange); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.3rem; display: block; }
+    .step-body h4 { font-size: 0.95rem; font-weight: 800; color: #1a1208; margin-bottom: 0.4rem; letter-spacing: 0.01em; }
+    .step-body p { font-size: 0.72rem; color: rgba(26,18,8,0.48); line-height: 1.7; margin: 0; }
     .how-visual { border-radius: 1.5rem; overflow: hidden; background: #e8e2d8; aspect-ratio: 4/5; position: relative; }
     .eye-symbol { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; }
     .eye-symbol svg { width: 60%; height: auto; opacity: 0.25; }
@@ -779,7 +882,8 @@
     @media(min-width:900px){ .involved-grid { grid-template-columns: repeat(3,1fr); } }
     .involved-card { background: #f5f2ec; border-radius: 1.25rem; padding: 2rem; opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .involved-card.visible { opacity: 1; transform: translateY(0); }
-    .involved-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .involved-icon { width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; flex-shrink: 0; }
+    .involved-icon svg { width: 1.5rem; height: 1.5rem; }
     .involved-title { font-size: 1rem; font-weight: 700; color: #1a1208; margin-bottom: 0.3rem; }
     .involved-sub { font-size: 0.58rem; color: var(--orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.7rem; }
     .involved-desc { font-size: 0.72rem; color: rgba(26,18,8,0.5); line-height: 1.7; margin-bottom: 1.2rem; }
@@ -985,7 +1089,8 @@
     .wws-list { list-style: none; margin-bottom: 2rem; }
     .wws-list li { display: flex; gap: 1rem; align-items: flex-start; padding: 0.9rem 0; border-bottom: 1px solid rgba(26,18,8,0.08); }
     .wws-list li:last-child { border-bottom: none; }
-    .wws-icon { font-size: 1.3rem; flex-shrink: 0; width: 2rem; text-align: center; margin-top: 0.1rem; }
+    .wws-icon { flex-shrink: 0; width: 2.6rem; height: 2.6rem; border-radius: 0.65rem; display: flex; align-items: center; justify-content: center; margin-top: 0.05rem; }
+    .wws-icon svg { width: 1.3rem; height: 1.3rem; }
     .wws-list li div { display: flex; flex-direction: column; gap: 0.15rem; }
     .wws-list li strong { font-size: 0.8rem; color: #1a1208; font-weight: 700; }
     .wws-list li span { font-size: 0.72rem; color: rgba(26,18,8,0.5); line-height: 1.5; }
@@ -1400,9 +1505,23 @@
 <!-- ===== HERO ===== -->
 <section id="hero" class="noise-overlay">
   <div class="hero-inner">
-    <video class="hero-video" autoplay loop muted playsinline>
+    <video class="hero-video" id="heroVideo" autoplay loop muted playsinline>
       <source src="https://res.cloudinary.com/dajekho84/video/upload/v1779901585/Untitled_Scene_05-26_03_49_07_202605272234_online-video-cutter.com_wpwsrh.mp4" type="video/mp4">
     </video>
+    <script>
+      (function(){
+        var MOBILE_SRC = "https://res.cloudinary.com/dajekho84/video/upload/v1780241012/Rural_India_eye_care_restored_202605312052_online-video-cutter.com_vfhldc.mp4";
+        var DESKTOP_SRC = "https://res.cloudinary.com/dajekho84/video/upload/v1779901585/Untitled_Scene_05-26_03_49_07_202605272234_online-video-cutter.com_wpwsrh.mp4";
+        var isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+          || (window.innerWidth <= 767 && 'ontouchstart' in window);
+        if(isMobile){
+          var v = document.getElementById("heroVideo");
+          v.src = MOBILE_SRC;
+          v.load();
+          v.play().catch(function(){});
+        }
+      })();
+    </script>
     <div class="hero-gradient"></div>
 
     <!-- NAVBAR -->
@@ -1590,35 +1709,72 @@
       <p class="wws-intro">Our work is focused on communities where the need is greatest and access is most limited. We go where mainstream healthcare does not.</p>
       <ul class="wws-list">
         <li>
-          <span class="wws-icon">🏘️</span>
+          <span class="wws-icon" style="background:rgba(192,90,24,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C05A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- two houses -->
+              <path d="M3 9.5L7 6l4 3.5V18H3V9.5z"/><path d="M13 11l5-3.5 5 3.5V18h-10V11z"/>
+              <rect x="5" y="13" width="2" height="3"/><rect x="15" y="13" width="2" height="3"/>
+              <path d="M8 18v-3h2v3"/>
+            </svg>
+          </span>
           <div>
             <strong>Rural Villages</strong>
             <span>Remote hamlets with no nearby eye care facility or specialist within reach</span>
           </div>
         </li>
         <li>
-          <span class="wws-icon">🎒</span>
+          <span class="wws-icon" style="background:rgba(42,58,84,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- school child with book -->
+              <circle cx="12" cy="5" r="2.2"/>
+              <path d="M8 21v-6a4 4 0 018 0v6"/>
+              <path d="M5 10h4l1 3h4l1-3h4"/>
+              <rect x="8" y="13" width="8" height="4" rx="1"/>
+            </svg>
+          </span>
           <div>
             <strong>Children in Schools</strong>
             <span>Government school students with undiagnosed vision impairment affecting learning</span>
           </div>
         </li>
         <li>
-          <span class="wws-icon">👴</span>
+          <span class="wws-icon" style="background:rgba(192,90,24,0.08);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C05A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- elderly person with cane -->
+              <circle cx="12" cy="4.5" r="2"/>
+              <path d="M9 10c0-1.66 1.34-3 3-3s3 1.34 3 3v4l1 6"/>
+              <path d="M12 14l-2 6"/>
+              <path d="M14 20l1.5 1.5"/>
+            </svg>
+          </span>
           <div>
             <strong>Elderly Individuals</strong>
             <span>With untreated cataracts, diabetic retinopathy or age-related eye conditions</span>
           </div>
         </li>
         <li>
-          <span class="wws-icon">🌾</span>
+          <span class="wws-icon" style="background:rgba(42,58,84,0.08);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- wheat / farming -->
+              <path d="M12 22V12"/><path d="M12 12C12 8 8 5 5 6c0 3 3 6 7 6z"/><path d="M12 12c0-4 4-7 7-6-1 3-4 6-7 6z"/>
+              <path d="M12 17c-2-1-4-1-5 0"/><path d="M12 17c2-1 4-1 5 0"/>
+            </svg>
+          </span>
           <div>
             <strong>Daily Wage Workers</strong>
             <span>Marginal farmers for whom vision loss directly means loss of livelihood</span>
           </div>
         </li>
         <li>
-          <span class="wws-icon">👩</span>
+          <span class="wws-icon" style="background:rgba(192,90,24,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C05A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- woman with heart -->
+              <circle cx="12" cy="4.5" r="2"/>
+              <path d="M9 21v-8a3 3 0 016 0v8"/>
+              <path d="M9 13H7l-1 4h10l-1-4h-2"/>
+              <path d="M10.5 9.5c.3-.8 1.7-.8 2 0 .2.5-.2 1-.5 1.3L12 11.5l-.5-.7c-.3-.3-.7-.8-.5-1.3z" fill="rgba(192,90,24,0.3)"/>
+            </svg>
+          </span>
           <div>
             <strong>Women &amp; Girls</strong>
             <span>Disproportionately affected by eye disease and less likely to seek care independently</span>
@@ -2053,10 +2209,114 @@ loading="lazy"
       <h2>From <em>outreach</em> to restored sight.</h2>
       <p>We identify underserved communities, conduct awareness campaigns, set up free screening camps, and provide immediate and follow-up care. No paperwork. No cost. Just care.</p>
       <div class="steps">
-        <div class="step"><div class="step-num">01</div><div class="step-body"><h4>Community Identification</h4><p>Ground teams map villages with limited healthcare access and high prevalence of untreated eye conditions.</p></div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-body"><h4>Free Screening Camp</h4><p>We deploy ophthalmologists, optometrists, and trained volunteers to conduct comprehensive eye exams on-site.</p></div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-body"><h4>Treatment &amp; Surgery</h4><p>Patients needing surgical intervention are transported to our partner hospitals. All costs borne by the Foundation.</p></div></div>
-        <div class="step"><div class="step-num">04</div><div class="step-body"><h4>Follow-up &amp; Spectacles</h4><p>Post-operative care and free prescription spectacles ensure lasting results and improved quality of life.</p></div></div>
+
+        <div class="step">
+          <div class="step-icon-bubble">
+            <!-- Map / location pin with village -->
+            <svg class="step-icon-art" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- ground -->
+              <ellipse cx="24" cy="40" rx="14" ry="3" fill="rgba(192,90,24,0.12)"/>
+              <!-- pin body -->
+              <path d="M24 6C17.37 6 12 11.37 12 18c0 9 12 24 12 24s12-15 12-24c0-6.63-5.37-12-12-12z" fill="rgba(192,90,24,0.18)" stroke="#C05A18" stroke-width="1.5" stroke-linejoin="round"/>
+              <!-- eye inside pin (our motif) -->
+              <ellipse cx="24" cy="18" rx="5" ry="3.2" stroke="#C05A18" stroke-width="1.3" fill="none"/>
+              <circle cx="24" cy="18" r="1.8" fill="#C05A18"/>
+              <!-- small house left -->
+              <rect x="6" y="32" width="7" height="6" rx="0.8" fill="none" stroke="rgba(192,90,24,0.45)" stroke-width="1.2"/>
+              <polyline points="5,32 9.5,27.5 14,32" fill="none" stroke="rgba(192,90,24,0.45)" stroke-width="1.2" stroke-linejoin="round"/>
+              <!-- small house right -->
+              <rect x="35" y="33" width="6" height="5" rx="0.8" fill="none" stroke="rgba(42,58,84,0.4)" stroke-width="1.2"/>
+              <polyline points="34,33 38,29 42,33" fill="none" stroke="rgba(42,58,84,0.4)" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <span class="step-num">01</span>
+            <div class="step-body"><h4>Community Identification</h4><p>Ground teams map villages with limited healthcare access and high prevalence of untreated eye conditions.</p></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon-bubble">
+            <!-- Eye exam / ophthalmoscope -->
+            <svg class="step-icon-art" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- large eye outline -->
+              <path d="M6 24c0 0 7-12 18-12s18 12 18 12-7 12-18 12S6 24 6 24z" fill="rgba(42,58,84,0.12)" stroke="#2A3A54" stroke-width="1.6" stroke-linejoin="round"/>
+              <!-- iris -->
+              <circle cx="24" cy="24" r="6" fill="rgba(42,58,84,0.15)" stroke="#2A3A54" stroke-width="1.5"/>
+              <!-- pupil -->
+              <circle cx="24" cy="24" r="2.5" fill="#2A3A54"/>
+              <!-- shine -->
+              <circle cx="26" cy="22" r="1" fill="#fff" opacity="0.7"/>
+              <!-- eyelash lines top -->
+              <line x1="24" y1="10" x2="24" y2="13" stroke="#2A3A54" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="17" y1="12.5" x2="18.5" y2="15" stroke="#2A3A54" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="31" y1="12.5" x2="29.5" y2="15" stroke="#2A3A54" stroke-width="1.2" stroke-linecap="round"/>
+              <!-- examination tool handle -->
+              <line x1="37" y1="31" x2="42" y2="38" stroke="#C05A18" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="36" cy="30" r="2.5" fill="none" stroke="#C05A18" stroke-width="1.4"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <span class="step-num">02</span>
+            <div class="step-body"><h4>Free Screening Camp</h4><p>We deploy ophthalmologists, optometrists, and trained volunteers to conduct comprehensive eye exams on-site.</p></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon-bubble">
+            <!-- Scalpel / surgical cross + healing hands -->
+            <svg class="step-icon-art" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- hospital cross -->
+              <rect x="18" y="10" width="12" height="28" rx="2" fill="rgba(192,90,24,0.1)" stroke="#C05A18" stroke-width="1.4"/>
+              <rect x="10" y="18" width="28" height="12" rx="2" fill="rgba(192,90,24,0.1)" stroke="#C05A18" stroke-width="1.4"/>
+              <!-- scalpel diagonal -->
+              <line x1="30" y1="8" x2="42" y2="20" stroke="#2A3A54" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M30 8 L28 14 L34 12 Z" fill="#2A3A54"/>
+              <!-- small eye in centre of cross -->
+              <ellipse cx="24" cy="24" rx="3.5" ry="2.2" stroke="#C05A18" stroke-width="1.2" fill="none"/>
+              <circle cx="24" cy="24" r="1" fill="#C05A18"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <span class="step-num">03</span>
+            <div class="step-body"><h4>Treatment &amp; Surgery</h4><p>Patients needing surgical intervention are transported to our partner hospitals. All costs borne by the Foundation.</p></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon-bubble">
+            <!-- Spectacles + care hands -->
+            <svg class="step-icon-art" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- left lens -->
+              <circle cx="16" cy="22" r="8" fill="rgba(42,58,84,0.1)" stroke="#2A3A54" stroke-width="1.6"/>
+              <!-- right lens -->
+              <circle cx="32" cy="22" r="8" fill="rgba(42,58,84,0.1)" stroke="#2A3A54" stroke-width="1.6"/>
+              <!-- bridge -->
+              <line x1="24" y1="22" x2="24" y2="22" stroke="#2A3A54" stroke-width="0"/>
+              <path d="M24 21 Q24 23 24 23" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="24" y1="21" x2="24" y2="23" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round"/>
+              <!-- left arm -->
+              <path d="M8 22 Q4 22 4 26" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+              <!-- right arm -->
+              <path d="M40 22 Q44 22 44 26" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+              <!-- shine in lenses -->
+              <circle cx="13" cy="20" r="1.2" fill="#fff" opacity="0.6"/>
+              <circle cx="29" cy="20" r="1.2" fill="#fff" opacity="0.6"/>
+              <!-- healing star / sparkle -->
+              <line x1="38" y1="8" x2="38" y2="14" stroke="#C05A18" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="35" y1="11" x2="41" y2="11" stroke="#C05A18" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="9" x2="40" y2="13" stroke="#C05A18" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+              <line x1="40" y1="9" x2="36" y2="13" stroke="#C05A18" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+              <!-- heart below -->
+              <path d="M22 37 C22 35 20 33 18 34 C16 35 16 37.5 18 39.5 L22 43 L26 39.5 C28 37.5 28 35 26 34 C24 33 22 35 22 37Z" fill="rgba(192,90,24,0.25)" stroke="#C05A18" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <span class="step-num">04</span>
+            <div class="step-body"><h4>Follow-up &amp; Spectacles</h4><p>Post-operative care and free prescription spectacles ensure lasting results and improved quality of life.</p></div>
+          </div>
+        </div>
+
       </div>
     </div>
   <div class="how-visual reveal fade-right">
@@ -2084,78 +2344,64 @@ loading="lazy"
       <h2>Our <em>Team</em></h2>
     </div>
     <div class="team-grid stagger-flip">
+
       <div class="team-card">
-        <div class="team-avatar" onclick="document.getElementById('upload-faraz-mirza').click()" title="Click to add photo">
-          <img id="img-faraz-mirza" src="" alt="" style="display:none;">
-          <span class="team-avatar-initials" id="initials-faraz-mirza">FM</span>
-          <div class="avatar-upload-hint">
-            <span>📷</span>
-            <p>Add Photo</p>
+        <span class="team-card-num">01</span>
+        <div class="team-card-top">
+          <div class="team-avatar" onclick="document.getElementById('upload-faraz-mirza').click()" title="Click to add photo">
+            <img id="img-faraz-mirza" src="" alt="" style="display:none;">
+            <span class="team-avatar-initials" id="initials-faraz-mirza">FM</span>
+            <div class="avatar-upload-hint"><span>📷</span><p>Add Photo</p></div>
+            <input type="file" id="upload-faraz-mirza" accept="image/*" style="display:none"
+              onchange="(function(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){var img=document.getElementById('img-faraz-mirza');img.src=e.target.result;img.style.display='block';document.getElementById('initials-faraz-mirza').style.display='none';};r.readAsDataURL(f);})(this)">
           </div>
-          <input type="file" id="upload-faraz-mirza" accept="image/*" style="display:none"
-            onchange="(function(inp){
-              var f=inp.files[0]; if(!f) return;
-              var r=new FileReader();
-              r.onload=function(e){
-                var img=document.getElementById('img-faraz-mirza');
-                img.src=e.target.result; img.style.display='block';
-                document.getElementById('initials-faraz-mirza').style.display='none';
-              };
-              r.readAsDataURL(f);
-            })(this)">
+          <div class="team-card-meta">
+            <div class="team-name">Faraz Mirza</div>
+            <div class="team-role">Founder &amp; Executive Director</div>
+          </div>
         </div>
-        <div class="team-name">Faraz Mirza</div>
-        <div class="team-role">Founder &amp; Executive Director</div>
+        <div class="team-divider"></div>
         <div class="team-bio">Driving the vision of Nain Taara Welfare Foundation — leading strategy, partnerships, and on-ground operations to bring quality eye care to India's most underserved communities.</div>
       </div>
+
       <div class="team-card">
-        <div class="team-avatar" onclick="document.getElementById('upload-medical-director').click()" title="Click to add photo">
-          <img id="img-medical-director" src="" alt="" style="display:none;">
-          <span class="team-avatar-initials" id="initials-medical-director">MD</span>
-          <div class="avatar-upload-hint">
-            <span>📷</span>
-            <p>Add Photo</p>
+        <span class="team-card-num">02</span>
+        <div class="team-card-top">
+          <div class="team-avatar" onclick="document.getElementById('upload-medical-director').click()" title="Click to add photo">
+            <img id="img-medical-director" src="" alt="" style="display:none;">
+            <span class="team-avatar-initials" id="initials-medical-director">MD</span>
+            <div class="avatar-upload-hint"><span>📷</span><p>Add Photo</p></div>
+            <input type="file" id="upload-medical-director" accept="image/*" style="display:none"
+              onchange="(function(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){var img=document.getElementById('img-medical-director');img.src=e.target.result;img.style.display='block';document.getElementById('initials-medical-director').style.display='none';};r.readAsDataURL(f);})(this)">
           </div>
-          <input type="file" id="upload-medical-director" accept="image/*" style="display:none"
-            onchange="(function(inp){
-              var f=inp.files[0]; if(!f) return;
-              var r=new FileReader();
-              r.onload=function(e){
-                var img=document.getElementById('img-medical-director');
-                img.src=e.target.result; img.style.display='block';
-                document.getElementById('initials-medical-director').style.display='none';
-              };
-              r.readAsDataURL(f);
-            })(this)">
+          <div class="team-card-meta">
+            <div class="team-name">Medical Director</div>
+            <div class="team-role">Clinical Operations</div>
+          </div>
         </div>
-        <div class="team-name">Medical Director</div>
-        <div class="team-role">Clinical Operations</div>
+        <div class="team-divider"></div>
         <div class="team-bio">Overseeing all surgical interventions, camp protocols, and clinical standards across our partner hospitals and mobile units — ensuring every patient receives expert care.</div>
       </div>
+
       <div class="team-card">
-        <div class="team-avatar" onclick="document.getElementById('upload-programs-director').click()" title="Click to add photo">
-          <img id="img-programs-director" src="" alt="" style="display:none;">
-          <span class="team-avatar-initials" id="initials-programs-director">PD</span>
-          <div class="avatar-upload-hint">
-            <span>📷</span>
-            <p>Add Photo</p>
+        <span class="team-card-num">03</span>
+        <div class="team-card-top">
+          <div class="team-avatar" onclick="document.getElementById('upload-programs-director').click()" title="Click to add photo">
+            <img id="img-programs-director" src="" alt="" style="display:none;">
+            <span class="team-avatar-initials" id="initials-programs-director">PD</span>
+            <div class="avatar-upload-hint"><span>📷</span><p>Add Photo</p></div>
+            <input type="file" id="upload-programs-director" accept="image/*" style="display:none"
+              onchange="(function(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){var img=document.getElementById('img-programs-director');img.src=e.target.result;img.style.display='block';document.getElementById('initials-programs-director').style.display='none';};r.readAsDataURL(f);})(this)">
           </div>
-          <input type="file" id="upload-programs-director" accept="image/*" style="display:none"
-            onchange="(function(inp){
-              var f=inp.files[0]; if(!f) return;
-              var r=new FileReader();
-              r.onload=function(e){
-                var img=document.getElementById('img-programs-director');
-                img.src=e.target.result; img.style.display='block';
-                document.getElementById('initials-programs-director').style.display='none';
-              };
-              r.readAsDataURL(f);
-            })(this)">
+          <div class="team-card-meta">
+            <div class="team-name">Programs Director</div>
+            <div class="team-role">Field &amp; Community Outreach</div>
+          </div>
         </div>
-        <div class="team-name">Programs Director</div>
-        <div class="team-role">Field &amp; Community Outreach</div>
+        <div class="team-divider"></div>
         <div class="team-bio">Coordinating ground operations, community mobilisation, and volunteer deployment across all active states — building relationships that last long after each camp concludes.</div>
       </div>
+
     </div>
   </div>
 </section>
@@ -2163,29 +2409,56 @@ loading="lazy"
 <!-- CERTIFICATES -->
 <section id="certificates" class="sec-pad sec-enter sec-stripe" style="background:#f5f2ec;">
   <div class="cert-inner">
-    <span class="section-label blur-in">Legal &amp; Governance</span>
-    <h2 class="rise-in">Registrations &amp; Certifications</h2>
+    <div class="cert-header blur-in">
+      <span class="section-label">Legal &amp; Governance</span>
+      <h2 class="rise-in">Registrations &amp; <em>Certifications</em></h2>
+    </div>
     <div class="cert-grid stagger-flip">
+
       <div class="cert-card">
-        <div class="cert-icon">🏛️</div>
-        <div class="cert-name">Section 8 Company</div>
-        <div class="cert-status">Companies Act 2013 · Registered</div>
+        <div class="cert-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 10v11M16 10v11M12 10v11"/></svg>
+        </div>
+        <div class="cert-text">
+          <div class="cert-name">Section 8 Company</div>
+          <div class="cert-status">Companies Act 2013</div>
+        </div>
+        <div class="cert-badge active">Registered</div>
       </div>
+
       <div class="cert-card">
-        <div class="cert-icon">📋</div>
-        <div class="cert-name">12A Certification</div>
-        <div class="cert-status pending">Income Tax Dept · In Process</div>
+        <div class="cert-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="cert-text">
+          <div class="cert-name">12A Certification</div>
+          <div class="cert-status pending">Income Tax Dept</div>
+        </div>
+        <div class="cert-badge pending-b">In Process</div>
       </div>
+
       <div class="cert-card">
-        <div class="cert-icon">💰</div>
-        <div class="cert-name">80G Certification</div>
-        <div class="cert-status pending">Tax Exemption on Donations · In Process</div>
+        <div class="cert-icon-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M16 8l-4 2-4-2"/></svg>
+        </div>
+        <div class="cert-text">
+          <div class="cert-name">80G Certification</div>
+          <div class="cert-status pending">Tax Exemption on Donations</div>
+        </div>
+        <div class="cert-badge pending-b">In Process</div>
       </div>
+
       <div class="cert-card">
-        <div class="cert-icon">📊</div>
-        <div class="cert-name">Transparency Reports</div>
-        <div class="cert-status">Annual Financial Disclosures</div>
+        <div class="cert-icon-wrap">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="cert-text">
+          <div class="cert-name">Transparency Reports</div>
+          <div class="cert-status">Annual Financial Disclosures</div>
+        </div>
+        <div class="cert-badge active">Published</div>
       </div>
+
     </div>
   </div>
 </section>
@@ -2200,35 +2473,55 @@ loading="lazy"
     </div>
     <div class="involved-grid stagger-flip">
       <div class="involved-card">
-        <div class="involved-icon">💰</div>
+        <div class="involved-icon" style="background:rgba(192,90,24,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C05A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 7v1m0 8v1"/><path d="M9.5 9.5A2.5 2.5 0 0112 8a2.5 2.5 0 010 5 2.5 2.5 0 000 5 2.5 2.5 0 002.5-1.5"/>
+          </svg>
+        </div>
         <div class="involved-title">Funding Support</div>
         <div class="involved-sub">Individual &amp; HNI Donors</div>
         <div class="involved-desc">Sponsor screening camps, school vision programs, or surgical interventions. Even small contributions create measurable, life-changing impact. Donations eligible for 80G exemption.</div>
         <a href="#donate" class="involved-btn">Donate Now</a>
       </div>
       <div class="involved-card">
-        <div class="involved-icon">🏢</div>
+        <div class="involved-icon" style="background:rgba(42,58,84,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><path d="M9 21V9"/><rect x="12" y="13" width="3" height="3"/><rect x="6" y="13" width="3" height="3"/>
+          </svg>
+        </div>
         <div class="involved-title">Corporate CSR</div>
         <div class="involved-sub">CSR Partnerships</div>
         <div class="involved-desc">Align your organisation's CSR mandate with a high-impact, transparent, and growing health initiative. We offer structured programs with impact reporting and recognition.</div>
         <a href="#contact" class="involved-btn">Partner With Us</a>
       </div>
       <div class="involved-card">
-        <div class="involved-icon">📦</div>
+        <div class="involved-icon" style="background:rgba(192,90,24,0.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C05A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M12 3v18"/><path d="M3 8l9 5 9-5"/>
+          </svg>
+        </div>
         <div class="involved-title">In-Kind Support</div>
         <div class="involved-sub">Equipment &amp; Supplies</div>
         <div class="involved-desc">Donate spectacles, diagnostic equipment, medicines, or mobility support for camp operations. Every item directly reaches those who cannot afford it.</div>
         <a href="#contact" class="involved-btn">Get in Touch</a>
       </div>
       <div class="involved-card">
-        <div class="involved-icon">🏦</div>
+        <div class="involved-icon" style="background:rgba(42,58,84,0.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 10v11M16 10v11M12 10v11"/>
+          </svg>
+        </div>
         <div class="involved-title">Institutional Grants</div>
         <div class="involved-sub">Foundations &amp; Agencies</div>
         <div class="involved-desc">We welcome conversations with foundations, bilateral agencies, and government schemes aligned to eye health and rural development.</div>
         <a href="#contact" class="involved-btn">Discuss Partnership</a>
       </div>
       <div class="involved-card" style="grid-column: span 1;">
-        <div class="involved-icon">🤝</div>
+        <div class="involved-icon" style="background:rgba(192,90,24,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C05A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </div>
         <div class="involved-title">Volunteer</div>
         <div class="involved-sub">Ways to Volunteer</div>
         <div class="involved-desc">Ophthalmologists, optometrists, community health workers, and professionals in communications, HR, and finance are all welcome.</div>
@@ -2257,7 +2550,11 @@ loading="lazy"
         <a href="#contact" class="involved-btn">Volunteer Now</a>
       </div>
       <div class="involved-card">
-        <div class="involved-icon">💼</div>
+        <div class="involved-icon" style="background:rgba(42,58,84,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2A3A54" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12"/><path d="M12 12v.01"/>
+          </svg>
+        </div>
         <div class="involved-title">Work With Us</div>
         <div class="involved-sub">Careers &amp; Internships</div>
         <div class="involved-desc">Join the Nain Taara team in a full-time, part-time, or internship capacity. Help us grow our operations, communications, fundraising, and field programs.</div>
