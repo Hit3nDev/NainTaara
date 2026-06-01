@@ -954,10 +954,20 @@
     .vol-tag { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 9999px; background: rgba(192,90,24,0.1); color: var(--orange); border: 1px solid rgba(192,90,24,0.2); }
 
     @media(max-width:767px){
-      .involved-card { grid-template-columns: 2.2rem 1fr; gap: 0 1rem; }
-      .involved-action { display: none; }
-      .involved-desc { margin-bottom: 0.8rem; }
-      .involved-card .involved-btn { display: inline-flex; }
+      .involved-card {
+        grid-template-columns: 2.2rem 1fr;
+        grid-template-rows: auto auto;
+        gap: 0 1rem;
+      }
+      .involved-num { grid-column: 1; grid-row: 1; }
+      .involved-body { grid-column: 2; grid-row: 1; }
+      .involved-action {
+        grid-column: 2; grid-row: 2;
+        display: block;
+        padding-top: 0.9rem;
+      }
+      .involved-btn { display: inline-flex; }
+      .involved-desc { margin-bottom: 0.6rem; }
     }
 
     /* VOLUNTEER TRACKS */
