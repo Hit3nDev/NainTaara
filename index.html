@@ -2986,10 +2986,10 @@ loading="lazy"
       </div>
       <div class="query-form fade-right">
         <h3>Send a Query</h3>
-        <div class="form-row"><label>Your Name</label><input type="text" placeholder="Full name"></div>
-        <div class="form-row"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-row"><label>Your Name</label><input id="query-name" type="text" placeholder="Full name"></div>
+        <div class="form-row"><label>Email Address</label><input id="query-email" type="email" placeholder="your@email.com"></div>
         <div class="form-row"><label>Query Type</label>
-          <select>
+          <select id="query-type">
             <option>Donation &amp; 80G Receipt</option>
             <option>Volunteer Enquiry — Onsite Support</option>
             <option>Volunteer Enquiry — Skill-Based (Remote)</option>
@@ -3001,7 +3001,7 @@ loading="lazy"
             <option>General Enquiry</option>
           </select>
         </div>
-        <div class="form-row"><label>Your Message</label><textarea placeholder="Write your query or message here..."></textarea></div>
+        <div class="form-row"><label>Your Message</label><textarea id="query-message" placeholder="Write your query or message here..."></textarea></div>
         <button class="query-submit" onclick="handleQuery()">Send Message →</button>
       </div>
     </div>
@@ -3354,8 +3354,49 @@ function selectHeroAmt(btn, amt){
 function handleDonate(){
   alert('Thank you for your generosity! 🙏\n\nPayment gateway coming soon.\nFor immediate donations, contact:\nnaintaarafoundation@gmail.com\n+91 9205050993');
 }
-function handleQuery(){
-  alert('Thank you for reaching out! 🙏\n\nWe will respond within 2 working days.\nUrgent: naintaarafoundation@gmail.com');
+async function handleQuery(){
+  const name    = document.getElementById('query-name').value.trim();
+  const email   = document.getElementById('query-email').value.trim();
+  const type    = document.getElementById('query-type').value;
+  const message = document.getElementById('query-message').value.trim();
+
+  if(!name || !email || !message){
+    alert('Please fill in your name, email, and message before sending.');
+    return;
+  }
+
+  const btn = document.querySelector('.query-submit');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'e536e3f6-2fbc-41f3-9fe0-c47611c0ffd7',
+        name:    name,
+        email:   email,
+        subject: 'Query: ' + type,
+        message: message
+      })
+    });
+    const data = await res.json();
+    if(data.success){
+      alert('Thank you for reaching out! 🙏\n\nWe will respond within 2 working days.\nUrgent: naintaarafoundation@gmail.com');
+      document.getElementById('query-name').value    = '';
+      document.getElementById('query-email').value   = '';
+      document.getElementById('query-message').value = '';
+      document.getElementById('query-type').selectedIndex = 0;
+    } else {
+      alert('Something went wrong. Please try again or email us at naintaarafoundation@gmail.com');
+    }
+  } catch(err) {
+    alert('Network error. Please try again or email us at naintaarafoundation@gmail.com');
+  } finally {
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }
 }
 function handleNewsletter(){
   const email = document.getElementById('newsletterEmail').value;
