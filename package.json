@@ -2,6 +2,7 @@
   "name": "naintaara",
   "version": "1.0.0",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "razorpay": "^2.9.2"
   }
 }
