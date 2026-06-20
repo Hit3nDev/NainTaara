@@ -1011,6 +1011,13 @@
     .report-btn { width: 100%; background: var(--orange); color: #fff; border: none; border-radius: 9999px; padding: 0.55rem; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
     .report-btn:hover { opacity: 0.85; }
     .report-btn:disabled { background: rgba(26,18,8,0.08); color: rgba(26,18,8,0.3); cursor: not-allowed; }
+    .reports-blur-wrap { position: relative; }
+    .reports-blur-wrap .reports-grid { filter: blur(6px); -webkit-filter: blur(6px); pointer-events: none; user-select: none; }
+    .reports-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; z-index: 5; }
+    .reports-overlay-inner { max-width: 28rem; background: rgba(255,255,255,0.88); border-radius: 1.5rem; padding: 2rem 2.2rem; box-shadow: 0 8px 40px rgba(26,18,8,0.12); }
+    .reports-overlay-inner h3 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.3rem, 2.6vw, 1.9rem); font-weight: 600; color: #1a1208; margin-bottom: 0.7rem; }
+    .reports-overlay-inner h3 em { font-family: 'EB Garamond', Georgia, serif; font-style: italic; color: var(--orange-light); }
+    .reports-overlay-inner p { font-size: 0.85rem; color: rgba(26,18,8,0.72); line-height: 1.7; }
 
     /* DONATE */
     #donate { background: #fff; }
@@ -1762,7 +1769,11 @@
           <div class="hero-donate-label">Make an impact today</div>
           <div class="hero-donate-amts">
             <button class="hamt active" onclick="selectHeroAmt(this,'100')">₹100</button>
+            <button class="hamt" onclick="selectHeroAmt(this,'250')">₹250</button>
             <button class="hamt" onclick="selectHeroAmt(this,'500')">₹500</button>
+            <button class="hamt" onclick="selectHeroAmt(this,'1000')">₹1,000</button>
+            <button class="hamt" onclick="selectHeroAmt(this,'2000')">₹2,000</button>
+            <button class="hamt" onclick="selectHeroAmt(this,'5000')">₹5,000</button>
           </div>
           <a href="#donate" class="hero-cta">
             Donate Now
@@ -2869,54 +2880,62 @@ loading="lazy"
       <h2>Annual Impact <em>Reports</em></h2>
       <p>We believe in complete financial transparency. Download our annual reports to see exactly how every rupee is used to restore sight and transform lives.</p>
     </div>
-    <div class="reports-grid stagger-flip">
-      <div class="report-card">
-        <div class="report-year">2024–25</div>
-        <div class="report-title">Annual Impact Report</div>
-        <div class="report-sub">Financial Year 2024–2025</div>
-        <ul class="report-highlights">
-          <li>3,200+ beneficiaries reached</li>
-          <li>18 eye camps conducted</li>
-          <li>180 free surgeries performed</li>
-          <li>Full financial disclosure</li>
-        </ul>
-        <button class="report-btn">📄 Download PDF</button>
+    <div class="reports-blur-wrap">
+      <div class="reports-grid stagger-flip">
+        <div class="report-card">
+          <div class="report-year">2024–25</div>
+          <div class="report-title">Annual Impact Report</div>
+          <div class="report-sub">Financial Year 2024–2025</div>
+          <ul class="report-highlights">
+            <li>3,200+ beneficiaries reached</li>
+            <li>18 eye camps conducted</li>
+            <li>180 free surgeries performed</li>
+            <li>Full financial disclosure</li>
+          </ul>
+          <button class="report-btn">📄 Download PDF</button>
+        </div>
+        <div class="report-card">
+          <div class="report-year">2023–24</div>
+          <div class="report-title">Annual Impact Report</div>
+          <div class="report-sub">Financial Year 2023–2024</div>
+          <ul class="report-highlights">
+            <li>2,800+ beneficiaries reached</li>
+            <li>14 eye camps conducted</li>
+            <li>120 free surgeries performed</li>
+            <li>Full financial disclosure</li>
+          </ul>
+          <button class="report-btn">📄 Download PDF</button>
+        </div>
+        <div class="report-card">
+          <div class="report-year">2022–23</div>
+          <div class="report-title">Annual Impact Report</div>
+          <div class="report-sub">Financial Year 2022–2023</div>
+          <ul class="report-highlights">
+            <li>Foundation year report</li>
+            <li>8 pilot camps conducted</li>
+            <li>60 surgeries performed</li>
+            <li>Inception &amp; setup costs</li>
+          </ul>
+          <button class="report-btn">📄 Download PDF</button>
+        </div>
+        <div class="report-card" style="border-style:dashed;opacity:0.65;">
+          <div class="report-year" style="color:rgba(222,219,200,0.3)">2025–26</div>
+          <div class="report-title" style="color:rgba(222,219,200,0.35)">Upcoming Report</div>
+          <div class="report-sub">In Preparation</div>
+          <ul class="report-highlights" style="opacity:0.4;">
+            <li>Report in progress</li>
+            <li>Expected: April 2026</li>
+            <li>Audited accounts</li>
+            <li>Compliance disclosures</li>
+          </ul>
+          <button class="report-btn" disabled>🔒 Coming Soon</button>
+        </div>
       </div>
-      <div class="report-card">
-        <div class="report-year">2023–24</div>
-        <div class="report-title">Annual Impact Report</div>
-        <div class="report-sub">Financial Year 2023–2024</div>
-        <ul class="report-highlights">
-          <li>2,800+ beneficiaries reached</li>
-          <li>14 eye camps conducted</li>
-          <li>120 free surgeries performed</li>
-          <li>Full financial disclosure</li>
-        </ul>
-        <button class="report-btn">📄 Download PDF</button>
-      </div>
-      <div class="report-card">
-        <div class="report-year">2022–23</div>
-        <div class="report-title">Annual Impact Report</div>
-        <div class="report-sub">Financial Year 2022–2023</div>
-        <ul class="report-highlights">
-          <li>Foundation year report</li>
-          <li>8 pilot camps conducted</li>
-          <li>60 surgeries performed</li>
-          <li>Inception &amp; setup costs</li>
-        </ul>
-        <button class="report-btn">📄 Download PDF</button>
-      </div>
-      <div class="report-card" style="border-style:dashed;opacity:0.65;">
-        <div class="report-year" style="color:rgba(222,219,200,0.3)">2025–26</div>
-        <div class="report-title" style="color:rgba(222,219,200,0.35)">Upcoming Report</div>
-        <div class="report-sub">In Preparation</div>
-        <ul class="report-highlights" style="opacity:0.4;">
-          <li>Report in progress</li>
-          <li>Expected: April 2026</li>
-          <li>Audited accounts</li>
-          <li>Compliance disclosures</li>
-        </ul>
-        <button class="report-btn" disabled>🔒 Coming Soon</button>
+      <div class="reports-overlay">
+        <div class="reports-overlay-inner">
+          <h3>We're Putting It <em>Together</em></h3>
+          <p>Our reports are being lovingly prepared — every number checked, every story verified. Good things take a little time. Check back soon, and thank you for caring enough to look.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -2932,8 +2951,11 @@ loading="lazy"
         <p>One donation can change a life forever. Here's what your contribution achieves:</p>
         <div class="donate-amts">
           <button class="donate-amt active" onclick="selectAmt(this,'100')">₹100</button>
+          <button class="donate-amt" onclick="selectAmt(this,'250')">₹250</button>
           <button class="donate-amt" onclick="selectAmt(this,'500')">₹500</button>
           <button class="donate-amt" onclick="selectAmt(this,'1000')">₹1,000</button>
+          <button class="donate-amt" onclick="selectAmt(this,'2000')">₹2,000</button>
+          <button class="donate-amt" onclick="selectAmt(this,'5000')">₹5,000</button>
         </div>
         <div class="impact-line" id="impact-line">₹100 provides a pair of prescription spectacles to a child in need.</div>
         <p class="donate-note-txt">All donations will be eligible for <strong>80G tax exemption</strong> under the Income Tax Act once certification is received. We are committed to full financial transparency — every rupee is accounted for in our Annual Reports.</p>
@@ -2947,7 +2969,7 @@ loading="lazy"
           <div class="form-row"><label>Mobile Number</label><input type="tel" id="donate-mobile" placeholder="+91 92050 50993"></div>
         </div>
         <div class="form-row-split">
-          <div class="form-row"><label>Amount (₹)</label><input type="number" id="donate-amount" placeholder="100" value="100"></div>
+          <div class="form-row"><label>Amount (₹)</label><input type="number" id="donate-amount" placeholder="100" value="100" oninput="updatePanRequirement()"></div>
           <div class="form-row"><label>Donate Towards</label>
             <select id="donate-purpose">
               <option>Eye Screening Camps</option>
@@ -2962,7 +2984,7 @@ loading="lazy"
         <div class="form-row"><label>Monthly Recurring?</label>
           <select id="donate-recurring"><option>One-time Donation</option><option>Monthly Recurring</option><option>Quarterly</option><option>Annual</option></select>
         </div>
-        <div class="form-row"><label>PAN Number (for 80G receipt when available)</label><input type="text" id="donate-pan" placeholder="ABCDE1234F (optional)"></div>
+        <div class="form-row"><label id="donate-pan-label">PAN Number (for 80G receipt when available)</label><input type="text" id="donate-pan" placeholder="ABCDE1234F (optional)"></div>
         <button class="donate-submit" id="donate-submit-btn" onclick="handleDonate()">❤ Proceed to Payment</button>
         <div class="donate-form-note">Secured payment · <strong>80G receipt</strong> available post-certification · Section 8 Company · Delhi</div>
       </div>
@@ -3370,14 +3392,31 @@ if(aboutBody){
 // Donate amount
 const impactMap = {
   '100': '₹100 provides a pair of prescription spectacles to a child in need.',
+  '250': '₹250 covers a comprehensive eye check-up and medicines for one patient.',
   '500': '₹500 sponsors an eye examination and medicines for five patients.',
-  '1000': '₹1,000 funds a complete eye screening for a small rural village.'
+  '1000': '₹1,000 funds a complete eye screening for a small rural village.',
+  '2000': '₹2,000 supports a free cataract surgery, restoring sight to one person.',
+  '5000': '₹5,000 sponsors a full eye camp outreach for an entire community.'
 };
 function selectAmt(btn, amt){
   document.querySelectorAll('.donate-amt').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('donate-amount').value = amt;
   document.getElementById('impact-line').textContent = impactMap[amt] || '';
+  updatePanRequirement();
+}
+
+function updatePanRequirement(){
+  const amount = parseFloat(document.getElementById('donate-amount').value);
+  const label  = document.getElementById('donate-pan-label');
+  const input  = document.getElementById('donate-pan');
+  if(amount > 2000){
+    label.textContent = 'PAN Number (required above ₹2,000)';
+    input.placeholder = 'ABCDE1234F (required)';
+  } else {
+    label.textContent = 'PAN Number (for 80G receipt when available)';
+    input.placeholder = 'ABCDE1234F (optional)';
+  }
 }
 
 function selectHeroAmt(btn, amt){
@@ -3391,6 +3430,7 @@ async function handleDonate(){
   const mobile   = document.getElementById('donate-mobile').value.trim();
   const amount   = parseFloat(document.getElementById('donate-amount').value);
   const purpose  = document.getElementById('donate-purpose').value;
+  const pan      = document.getElementById('donate-pan').value.trim();
   const btn      = document.getElementById('donate-submit-btn');
 
   if(!name || !email || !mobile){
@@ -3399,6 +3439,11 @@ async function handleDonate(){
   }
   if(!amount || isNaN(amount) || amount < 1){
     alert('Please enter a valid donation amount (minimum ₹1).');
+    return;
+  }
+  if(amount > 2000 && !pan){
+    alert('PAN number is required for donations above ₹2,000 (as per Income Tax rules for 80G receipts).');
+    document.getElementById('donate-pan').focus();
     return;
   }
 
@@ -3442,7 +3487,13 @@ async function handleDonate(){
             body: JSON.stringify({
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature
+              razorpay_signature: response.razorpay_signature,
+              donor_name: name,
+              donor_email: email,
+              donor_mobile: mobile,
+              donor_pan: pan,
+              amount: amount,
+              purpose: purpose
             })
           });
           const verifyData = await verifyRes.json();
