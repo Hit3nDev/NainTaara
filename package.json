@@ -1,8 +1,10 @@
 {
-  "name": "naintaara",
+  "name": "ntwf-website",
   "version": "1.0.0",
+  "private": true,
+  "description": "Nain Taara Welfare Foundation website",
   "dependencies": {
-    "dotenv": "^17.2.1",
-    "razorpay": "^2.9.2"
+    "razorpay": "^2.9.4",
+    "dotenv": "^16.4.5"
   }
 }
