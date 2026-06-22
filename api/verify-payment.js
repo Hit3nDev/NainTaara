@@ -102,30 +102,67 @@ module.exports = async (req, res) => {
     const safeAmount = amount ? `₹${amount}` : "N/A";
     const timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
+    const LOGO_URL = "https://res.cloudinary.com/dajekho84/image/upload/v1780296549/3cc8f12c-b8af-4915-b31b-cb36ecdff172_removalai_preview_olxguq.png";
+    const BRAND_ORANGE = "#C05A18";
+    const BRAND_DARK = "#1a1208";
+
     const adminHtml = `
-      <h2>New Donation Received</h2>
-      <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
-        <tr><td><strong>Name</strong></td><td>${safeName}</td></tr>
-        <tr><td><strong>Email</strong></td><td>${safeEmail}</td></tr>
-        <tr><td><strong>Mobile</strong></td><td>${safeMobile}</td></tr>
-        <tr><td><strong>Amount</strong></td><td>${safeAmount}</td></tr>
-        <tr><td><strong>Purpose</strong></td><td>${safePurpose}</td></tr>
-        <tr><td><strong>Donation Type</strong></td><td>${safeRecurring}</td></tr>
-        <tr><td><strong>PAN</strong></td><td>${safePan}</td></tr>
-        <tr><td><strong>Razorpay Order ID</strong></td><td>${escapeHtml(razorpay_order_id)}</td></tr>
-        <tr><td><strong>Razorpay Payment ID</strong></td><td>${escapeHtml(razorpay_payment_id)}</td></tr>
-        <tr><td><strong>Date/Time (IST)</strong></td><td>${timestamp}</td></tr>
-      </table>
+    <div style="background:#f4f1ea;padding:32px 16px;font-family:'Helvetica Neue',Arial,sans-serif;">
+      <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #ece7da;">
+        <div style="background:${BRAND_DARK};padding:20px 28px;">
+          <span style="color:#ffffff;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Nain Taara Welfare Foundation</span>
+        </div>
+        <div style="padding:28px;">
+          <h2 style="margin:0 0 4px;color:${BRAND_DARK};font-size:20px;">New Donation Received</h2>
+          <p style="margin:0 0 20px;color:${BRAND_ORANGE};font-size:28px;font-weight:700;">${safeAmount}</p>
+          <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;font-size:14px;color:${BRAND_DARK};">
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Name</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-weight:600;">${safeName}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Email</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safeEmail}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Mobile</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safeMobile}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Purpose</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safePurpose}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Donation Type</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safeRecurring}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">PAN</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safePan}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Order ID</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-family:monospace;font-size:12px;">${escapeHtml(razorpay_order_id)}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Payment ID</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-family:monospace;font-size:12px;">${escapeHtml(razorpay_payment_id)}</td></tr>
+            <tr><td style="padding:8px 0;color:#8a7d68;">Date/Time (IST)</td><td style="padding:8px 0;text-align:right;">${timestamp}</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
     `;
 
     const donorHtml = `
-      <p>Dear ${safeName},</p>
-      <p>Thank you for your generous donation of <strong>${safeAmount}</strong> to Nain Taara Welfare Foundation
-      towards <strong>${safePurpose}</strong>. Your support helps us restore sight and transform lives.</p>
-      <p><strong>Payment Reference:</strong> ${escapeHtml(razorpay_payment_id)}<br>
-      <strong>Date:</strong> ${timestamp}</p>
-      <p>Your 80G tax-exemption receipt will be issued after the financial year ends and sent to this email address.</p>
-      <p>With gratitude,<br>Nain Taara Welfare Foundation</p>
+    <div style="background:#f4f1ea;padding:32px 16px;font-family:'Helvetica Neue',Arial,sans-serif;">
+      <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #ece7da;">
+        <div style="background:${BRAND_DARK};padding:32px 28px;text-align:center;">
+          <img src="${LOGO_URL}" alt="Nain Taara Welfare Foundation" style="height:48px;max-width:240px;" />
+        </div>
+        <div style="padding:36px 32px;">
+          <p style="margin:0 0 4px;color:#8a7d68;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;">Thank You</p>
+          <h1 style="margin:0 0 20px;color:${BRAND_DARK};font-size:24px;font-family:Georgia,serif;">Dear ${safeName},</h1>
+          <p style="margin:0 0 20px;color:#4a4136;font-size:15px;line-height:1.7;">
+            Your generous donation of <strong style="color:${BRAND_ORANGE};">${safeAmount}</strong> towards
+            <strong>${safePurpose}</strong> has been received with gratitude. Because of you, we can continue
+            restoring sight and transforming lives.
+          </p>
+          <div style="background:#f9f6ee;border-radius:8px;padding:18px 20px;margin:24px 0;">
+            <table cellpadding="0" cellspacing="0" style="width:100%;font-size:13px;color:#4a4136;">
+              <tr><td style="padding:4px 0;color:#8a7d68;">Payment Reference</td><td style="padding:4px 0;text-align:right;font-family:monospace;">${escapeHtml(razorpay_payment_id)}</td></tr>
+              <tr><td style="padding:4px 0;color:#8a7d68;">Date</td><td style="padding:4px 0;text-align:right;">${timestamp}</td></tr>
+              <tr><td style="padding:4px 0;color:#8a7d68;">Donation Type</td><td style="padding:4px 0;text-align:right;">${safeRecurring}</td></tr>
+            </table>
+          </div>
+          <p style="margin:0 0 28px;color:#4a4136;font-size:14px;line-height:1.7;">
+            Your <strong>80G tax-exemption receipt</strong> will be issued after the financial year ends and
+            sent to this email address.
+          </p>
+          <p style="margin:0;color:${BRAND_DARK};font-size:15px;">With gratitude,<br><strong>Nain Taara Welfare Foundation</strong></p>
+        </div>
+        <div style="background:#f9f6ee;padding:18px 28px;text-align:center;border-top:1px solid #ece7da;">
+          <p style="margin:0;color:#a89c87;font-size:11px;">Section 8 Company · Delhi, India · support@naintaara.ngo</p>
+        </div>
+      </div>
+    </div>
     `;
 
     // Fire both emails; use Promise.allSettled so one failing never
