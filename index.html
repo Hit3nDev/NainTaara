@@ -1071,6 +1071,21 @@
     .donate-submit { width: 100%; background: var(--orange); color: #fff; border: none; border-radius: 9999px; padding: 0.8rem; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; margin-top: 0.5rem; transition: transform 0.2s; }
     .donate-submit:hover { transform: scale(1.02); }
     .donate-form-note { font-size: 0.62rem; color: rgba(26,18,8,0.3); text-align: center; margin-top: 0.8rem; line-height: 1.6; }
+
+    /* SITE MODAL — replaces alert() */
+    .site-modal-overlay { position: fixed; inset: 0; background: rgba(26,18,8,0.55); backdrop-filter: blur(4px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1.25rem; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .site-modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .site-modal-box { background: #fff; border-radius: 1.25rem; max-width: 26rem; width: 100%; padding: 2.2rem 2rem 1.8rem; text-align: center; box-shadow: 0 24px 60px rgba(26,18,8,0.25); transform: translateY(16px) scale(0.97); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .site-modal-overlay.active .site-modal-box { transform: translateY(0) scale(1); }
+    .site-modal-icon { width: 3.4rem; height: 3.4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.6rem; }
+    .site-modal-icon.success { background: rgba(192,90,24,0.12); color: var(--orange); }
+    .site-modal-icon.error { background: rgba(180,40,30,0.1); color: #b4281e; }
+    .site-modal-icon.warn { background: rgba(192,90,24,0.1); color: var(--orange-light); }
+    .site-modal-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); margin-bottom: 0.5rem; }
+    .site-modal-msg { font-size: 0.85rem; color: rgba(26,18,8,0.62); line-height: 1.65; margin-bottom: 1.5rem; }
+    .site-modal-btn { background: var(--orange); color: #fff; border: none; border-radius: 9999px; padding: 0.65rem 2rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .site-modal-btn:hover { background: var(--orange-light); }
+    .site-modal-btn.secondary { background: transparent; color: rgba(26,18,8,0.5); }
     .donate-form-note strong { color: rgba(26,18,8,0.55); }
 
     /* CONTACT */
@@ -2966,7 +2981,7 @@ loading="lazy"
         <div class="form-row"><label>Full Name</label><input type="text" id="donate-name" placeholder="Your full name"></div>
         <div class="form-row-split">
           <div class="form-row"><label>Email Address</label><input type="email" id="donate-email" placeholder="your@email.com"></div>
-          <div class="form-row"><label>Mobile Number</label><input type="tel" id="donate-mobile" placeholder="+91 9999472666"></div>
+          <div class="form-row"><label>Mobile Number</label><input type="tel" id="donate-mobile" placeholder="+91 99994 72666"></div>
         </div>
         <div class="form-row-split">
           <div class="form-row"><label>Amount (₹)</label><input type="number" id="donate-amount" placeholder="100" value="100" oninput="updatePanRequirement()"></div>
@@ -2984,7 +2999,7 @@ loading="lazy"
         <div class="form-row"><label>Monthly Recurring?</label>
           <select id="donate-recurring"><option>One-time Donation</option><option>Monthly Recurring</option><option>Quarterly</option><option>Annual</option></select>
         </div>
-        <div class="form-row"><label id="donate-pan-label">PAN Number (for 80G receipt when available)</label><input type="text" id="donate-pan" placeholder="ABCDE1234F (optional)"></div>
+        <div class="form-row"><label id="donate-pan-label">PAN Number (for 80G receipt when available)</label><input type="text" id="donate-pan" placeholder="ABCDE1234F (optional)" maxlength="10" oninput="this.value=this.value.toUpperCase()"></div>
         <button class="donate-submit" id="donate-submit-btn" onclick="handleDonate()">❤ Proceed to Payment</button>
         <div class="donate-form-note">Secured payment · <strong>80G receipt</strong> available post-certification · Section 8 Company · Delhi</div>
       </div>
@@ -3162,7 +3177,7 @@ loading="lazy"
           <strong>Email</strong>
           <a href="mailto:support@naintaara.ngo" style="color:rgba(255,255,255,0.45);text-decoration:none;">support@naintaara.ngo</a>
         </div>
-        <p class="footer-tagline">""</p>
+        <p class="footer-tagline"></p>
         <div class="footer-badges">
           <span class="fbadge">Section 8</span>
           <span class="fbadge">80G Certified</span>
@@ -3424,26 +3439,59 @@ function selectHeroAmt(btn, amt){
   btn.classList.add('active');
 }
 
+function showSiteModal({ type = 'success', title, message, buttonText = 'Got it', onClose = null }){
+  const overlay = document.getElementById('site-modal-overlay');
+  const iconEl  = document.getElementById('site-modal-icon');
+  const titleEl = document.getElementById('site-modal-title');
+  const msgEl   = document.getElementById('site-modal-msg');
+  const btnEl   = document.getElementById('site-modal-btn');
+
+  const icons = { success: '❤', error: '⚠', warn: '🪪' };
+  iconEl.className = 'site-modal-icon ' + type;
+  iconEl.textContent = icons[type] || icons.success;
+  titleEl.textContent = title;
+  msgEl.textContent = message;
+  btnEl.textContent = buttonText;
+
+  overlay.classList.add('active');
+
+  function close(){
+    overlay.classList.remove('active');
+    btnEl.removeEventListener('click', close);
+    overlay.removeEventListener('click', overlayClick);
+    if(onClose) onClose();
+  }
+  function overlayClick(e){ if(e.target === overlay) close(); }
+
+  btnEl.addEventListener('click', close);
+  overlay.addEventListener('click', overlayClick);
+}
+
 async function handleDonate(){
-  const name     = document.getElementById('donate-name').value.trim();
-  const email    = document.getElementById('donate-email').value.trim();
-  const mobile   = document.getElementById('donate-mobile').value.trim();
-  const amount   = parseFloat(document.getElementById('donate-amount').value);
-  const purpose  = document.getElementById('donate-purpose').value;
-  const pan      = document.getElementById('donate-pan').value.trim();
-  const btn      = document.getElementById('donate-submit-btn');
+  const name      = document.getElementById('donate-name').value.trim();
+  const email     = document.getElementById('donate-email').value.trim();
+  const mobile    = document.getElementById('donate-mobile').value.trim();
+  const amount    = parseFloat(document.getElementById('donate-amount').value);
+  const purpose   = document.getElementById('donate-purpose').value;
+  const recurring = document.getElementById('donate-recurring').value;
+  const pan       = document.getElementById('donate-pan').value.trim();
+  const btn       = document.getElementById('donate-submit-btn');
 
   if(!name || !email || !mobile){
-    alert('Please fill in your name, email, and mobile number.');
+    showSiteModal({ type:'warn', title:'A Few Details Missing', message:'Please fill in your name, email, and mobile number to proceed.' });
     return;
   }
   if(!amount || isNaN(amount) || amount < 1){
-    alert('Please enter a valid donation amount (minimum ₹1).');
+    showSiteModal({ type:'warn', title:'Invalid Amount', message:'Please enter a valid donation amount (minimum ₹1).' });
     return;
   }
   if(amount > 2000 && !pan){
-    alert('PAN number is required for donations above ₹2,000 (as per Income Tax rules for 80G receipts).');
-    document.getElementById('donate-pan').focus();
+    showSiteModal({ type:'warn', title:'PAN Required', message:'PAN number is required for donations above ₹2,000, as per Income Tax rules for 80G receipts.', onClose:()=>document.getElementById('donate-pan').focus() });
+    return;
+  }
+  const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+  if(pan && !panPattern.test(pan)){
+    showSiteModal({ type:'warn', title:'PAN Format Looks Off', message:'A PAN is 10 characters: 5 letters, 4 numbers, then 1 letter — for example, ABCDE1234F.', onClose:()=>document.getElementById('donate-pan').focus() });
     return;
   }
 
@@ -3460,7 +3508,7 @@ async function handleDonate(){
     const orderData = await orderRes.json();
 
     if(!orderRes.ok || !orderData.success){
-      alert(orderData.message || 'Unable to start payment. Please try again.');
+      showSiteModal({ type:'error', title:'Couldn\'t Start Payment', message: orderData.message || 'Something went wrong on our end. Please try again in a moment.' });
       btn.disabled = false;
       btn.textContent = originalBtnText;
       return;
@@ -3476,7 +3524,7 @@ async function handleDonate(){
       description: purpose || 'Donation',
       order_id: order.id,
       prefill: { name, email, contact: mobile },
-      notes: { purpose: purpose || 'Where Needed Most' },
+      notes: { purpose: purpose || 'Where Needed Most', recurring: recurring || 'One-time Donation' },
       theme: { color: '#c05a18' },
       handler: async function(response){
         btn.textContent = 'Verifying…';
@@ -3493,18 +3541,19 @@ async function handleDonate(){
               donor_mobile: mobile,
               donor_pan: pan,
               amount: amount,
-              purpose: purpose
+              purpose: purpose,
+              recurring: recurring
             })
           });
           const verifyData = await verifyRes.json();
 
           if(verifyRes.ok && verifyData.success){
-            alert('Thank you for your generosity! 🙏\n\nYour donation of ₹' + amount + ' has been received. A confirmation will be sent to ' + email + '.');
+            showSiteModal({ type:'success', title:'Thank You for Your Generosity', message:'Your donation of ₹' + amount + ' has been received. A confirmation will be sent to ' + email + '.', buttonText:'Done', onClose:()=>{ document.getElementById('donate-name').value=''; document.getElementById('donate-email').value=''; document.getElementById('donate-mobile').value=''; document.getElementById('donate-pan').value=''; } });
           } else {
-            alert('We received your payment but could not verify it automatically. Please contact support@naintaara.ngo with your payment ID: ' + response.razorpay_payment_id);
+            showSiteModal({ type:'error', title:'Payment Received — Verifying', message:'We received your payment but could not verify it automatically. Please contact support@naintaara.ngo with your payment ID: ' + response.razorpay_payment_id });
           }
         } catch(err){
-          alert('We received your payment but verification failed. Please contact support@naintaara.ngo with your payment ID: ' + response.razorpay_payment_id);
+          showSiteModal({ type:'error', title:'Payment Received — Verifying', message:'We received your payment but verification failed. Please contact support@naintaara.ngo with your payment ID: ' + response.razorpay_payment_id });
         } finally {
           btn.disabled = false;
           btn.textContent = originalBtnText;
@@ -3520,7 +3569,7 @@ async function handleDonate(){
 
     const rzp = new Razorpay(options);
     rzp.on('payment.failed', function(response){
-      alert('Payment failed: ' + (response.error && response.error.description ? response.error.description : 'Please try again.'));
+      showSiteModal({ type:'error', title:'Payment Failed', message: response.error && response.error.description ? response.error.description : 'Something went wrong with the payment. Please try again.' });
       btn.disabled = false;
       btn.textContent = originalBtnText;
     });
@@ -3528,7 +3577,7 @@ async function handleDonate(){
 
   } catch(err){
     console.error(err);
-    alert('Something went wrong while starting your payment. Please try again or contact support@naintaara.ngo.');
+    showSiteModal({ type:'error', title:'Something Went Wrong', message:'We couldn\'t start the payment. Please try again, or contact support@naintaara.ngo if this keeps happening.' });
     btn.disabled = false;
     btn.textContent = originalBtnText;
   }
@@ -3887,5 +3936,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 })();
 </script>
+
+<div class="site-modal-overlay" id="site-modal-overlay">
+  <div class="site-modal-box">
+    <div class="site-modal-icon success" id="site-modal-icon">❤</div>
+    <div class="site-modal-title" id="site-modal-title">Title</div>
+    <div class="site-modal-msg" id="site-modal-msg">Message</div>
+    <button class="site-modal-btn" id="site-modal-btn">Got it</button>
+  </div>
+</div>
 </body>
 </html>
