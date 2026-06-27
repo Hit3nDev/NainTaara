@@ -789,11 +789,11 @@
     .gallery-right { flex: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
     .gallery-strip-outer { width: 100%; overflow: hidden; position: relative; }
     .gallery-strip { display: flex; gap: 1rem; padding: 1.5rem 0; transition: transform 0.45s cubic-bezier(0.25,1,0.5,1); will-change: transform; }
-    .gallery-card { flex: 0 0 calc((100% - 2rem) / 3); border-radius: 1rem; overflow: hidden; background: #e8e2d8; position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .gallery-card { flex: 0 0 calc((100% - 2rem) / 3); display: flex; flex-direction: column; border-radius: 1rem; overflow: hidden; background: #e8e2d8; position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .gallery-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,18,8,0.15); }
-    .gallery-card-img { width: 100%; height: 200px; object-fit: cover; display: block; background: #d8d0c4; }
-    .gallery-card-img-placeholder { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(135deg,#2a1a08,#4a2a10); }
-    .gallery-card-body { padding: 1rem 1rem 1.1rem; background: #fff; }
+    .gallery-card-img { width: 100%; height: 200px; object-fit: cover; display: block; background: #d8d0c4; flex-shrink: 0; }
+    .gallery-card-img-placeholder { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(135deg,#2a1a08,#4a2a10); flex-shrink: 0; }
+    .gallery-card-body { padding: 1rem 1rem 1.1rem; background: #fff; flex: 1; display: flex; flex-direction: column; justify-content: center; }
     .gallery-card-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #1a1208; margin-bottom: 0.3rem; }
     .gallery-card-sub { font-size: 0.7rem; color: rgba(26,18,8,0.5); font-weight: 400; }
     .gallery-card-bar { height: 3px; background: var(--orange); border-radius: 0 0 1rem 1rem; }
@@ -2334,15 +2334,6 @@ loading="lazy"
           </div>
 
           <div class="gallery-card">
-            <img class="gallery-card-img" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=70" alt="" loading="lazy" onerror="this.style.display='none';this.nextSibling&&(this.nextSibling.style.display='flex')">
-            <div class="gallery-card-body">
-              <div class="gallery-card-title">Mobile Vision Unit</div>
-              <div class="gallery-card-sub">Village Outreach · Bihar</div>
-            </div>
-            <div class="gallery-card-bar"></div>
-          </div>
-
-          <div class="gallery-card">
             <img class="gallery-card-img" src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=70" alt="" loading="lazy" onerror="this.style.display='none';this.nextSibling&&(this.nextSibling.style.display='flex')">
             <div class="gallery-card-body">
               <div class="gallery-card-title">Volunteer Training</div>
@@ -2973,8 +2964,8 @@ loading="lazy"
           <button class="donate-amt" onclick="selectAmt(this,'5000')">₹5,000</button>
         </div>
         <div class="impact-line" id="impact-line">₹100 provides a pair of prescription spectacles to a child in need.</div>
-        <p class="donate-note-txt">All donations will be eligible for <strong>80G tax exemption</strong> under the Income Tax Act once certification is received. We are committed to full financial transparency — every rupee is accounted for in our Annual Reports.</p>
-        <p class="donate-note-txt" style="margin-top:0.5rem;">80G receipt will be issued after the financial year ends.</p>
+        <p class="donate-note-txt">All donations are eligible for <strong>80G tax exemption</strong> under the Income Tax Act once certification is received. We are committed to full financial transparency — every rupee is accounted for in our Annual Reports.</p>
+        <p class="donate-note-txt" style="margin-top:0.5rem;">A PAN, Aadhaar, or any other accepted ID is <strong>not required to donate</strong>, even for amounts above ₹2,000 — it's needed only if you'd like an <strong>80G tax receipt</strong>. 80G receipts will be issued after the financial year ends.</p>
       </div>
       <div class="donate-form reveal">
         <h3>Make a Donation</h3>
@@ -2984,7 +2975,7 @@ loading="lazy"
           <div class="form-row"><label>Mobile Number</label><input type="tel" id="donate-mobile" placeholder="+91 99994 72666"></div>
         </div>
         <div class="form-row-split">
-          <div class="form-row"><label>Amount (₹)</label><input type="number" id="donate-amount" placeholder="100" value="100" oninput="updatePanRequirement()"></div>
+          <div class="form-row"><label>Amount (₹)</label><input type="number" id="donate-amount" placeholder="100" value="100"></div>
           <div class="form-row"><label>Donate Towards</label>
             <select id="donate-purpose">
               <option>Eye Screening Camps</option>
@@ -2999,9 +2990,31 @@ loading="lazy"
         <div class="form-row"><label>Monthly Recurring?</label>
           <select id="donate-recurring"><option>One-time Donation</option><option>Monthly Recurring</option><option>Quarterly</option><option>Annual</option></select>
         </div>
-        <div class="form-row"><label id="donate-pan-label">PAN Number (for 80G receipt when available)</label><input type="text" id="donate-pan" placeholder="ABCDE1234F (optional)" maxlength="10" oninput="this.value=this.value.toUpperCase()"></div>
+        <div class="form-row"><label>Would you like an 80G tax receipt?</label>
+          <select id="donate-80g" onchange="toggle80GFields()">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+        <div id="donate-80g-fields" style="display:none;">
+          <div class="form-row-split">
+            <div class="form-row"><label>ID Type</label>
+              <select id="donate-id-type" onchange="updateIdPlaceholder()">
+                <option value="PAN">PAN Card</option>
+                <option value="Aadhaar">Aadhaar Number</option>
+                <option value="TIN">Tax Identification Number (TIN)</option>
+                <option value="Passport">Passport Number</option>
+                <option value="VoterID">Electoral Photo ID Card (Voter ID)</option>
+                <option value="DrivingLicense">Driving License Number</option>
+                <option value="RationCard">Ration Card Number</option>
+              </select>
+            </div>
+            <div class="form-row"><label id="donate-id-label">PAN Number</label><input type="text" id="donate-id-number" placeholder="ABCDE1234F" oninput="this.value=this.value.toUpperCase()"></div>
+          </div>
+          <p class="donate-note-txt" style="margin:-0.3rem 0 0.9rem;">An 80G receipt can only be issued if a valid ID number is provided here.</p>
+        </div>
         <button class="donate-submit" id="donate-submit-btn" onclick="handleDonate()">❤ Proceed to Payment</button>
-        <div class="donate-form-note">Secured payment · <strong>80G receipt</strong> available post-certification · Section 8 Company · Delhi</div>
+        <div class="donate-form-note">Secured payment · <strong>80G receipt</strong> requires a valid ID above · ID is optional otherwise · Section 8 Company · Delhi</div>
       </div>
     </div>
   </div>
@@ -3117,7 +3130,7 @@ loading="lazy"
       </div>
       <div class="faq2-item">
         <button class="faq2-q" onclick="toggleFAQ2(this)">Is my donation tax-deductible? <span class="faq2-icon">+</span></button>
-        <div class="faq2-a">Nain Taara Welfare Foundation has obtained 80G certification from the Income Tax Department. All donations will be eligible for tax deduction under Section 80G of the Income Tax Act. We will issue receipts accordingly. Please check back for updates.</div>
+        <div class="faq2-a">Nain Taara Welfare Foundation has obtained 80G certification from the Income Tax Department. All donations are eligible for tax deduction under Section 80G of the Income Tax Act. To receive an 80G receipt, you'll need to provide one valid ID at the time of donation — PAN, Aadhaar, TIN, Passport, Electoral Photo ID (Voter ID), Driving License, or Ration Card number. This ID is needed only if you want the 80G receipt; it is not required to complete a donation of any amount.</div>
       </div>
       <div class="faq2-item">
         <button class="faq2-q" onclick="toggleFAQ2(this)">Can I volunteer for a specific program? <span class="faq2-icon">+</span></button>
@@ -3418,20 +3431,58 @@ function selectAmt(btn, amt){
   btn.classList.add('active');
   document.getElementById('donate-amount').value = amt;
   document.getElementById('impact-line').textContent = impactMap[amt] || '';
-  updatePanRequirement();
 }
 
-function updatePanRequirement(){
-  const amount = parseFloat(document.getElementById('donate-amount').value);
-  const label  = document.getElementById('donate-pan-label');
-  const input  = document.getElementById('donate-pan');
-  if(amount > 2000){
-    label.textContent = 'PAN Number (required above ₹2,000)';
-    input.placeholder = 'ABCDE1234F (required)';
-  } else {
-    label.textContent = 'PAN Number (for 80G receipt when available)';
-    input.placeholder = 'ABCDE1234F (optional)';
+function toggle80GFields(){
+  const wants = document.getElementById('donate-80g').value;
+  document.getElementById('donate-80g-fields').style.display = wants === 'Yes' ? 'block' : 'none';
+}
+
+const idTypeLabels = {
+  PAN: 'PAN Number',
+  Aadhaar: 'Aadhaar Number',
+  TIN: 'Tax Identification Number (TIN)',
+  Passport: 'Passport Number',
+  VoterID: 'Electoral Photo ID Card Number',
+  DrivingLicense: 'Driving License Number',
+  RationCard: 'Ration Card Number'
+};
+const idTypePlaceholders = {
+  PAN: 'ABCDE1234F',
+  Aadhaar: '123456789012',
+  TIN: 'Enter your TIN',
+  Passport: 'A1234567',
+  VoterID: 'ABC1234567',
+  DrivingLicense: 'Enter your license number',
+  RationCard: 'Enter your ration card number'
+};
+
+function updateIdPlaceholder(){
+  const type  = document.getElementById('donate-id-type').value;
+  const label = document.getElementById('donate-id-label');
+  const input = document.getElementById('donate-id-number');
+  label.textContent = idTypeLabels[type] || 'ID Number';
+  input.placeholder = idTypePlaceholders[type] || 'Enter ID number';
+}
+
+function validateIdNumber(type, value){
+  const v = value.toUpperCase().replace(/\s/g, '');
+  if(type === 'PAN' && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(v)){
+    return 'A PAN is 10 characters: 5 letters, 4 numbers, then 1 letter — for example, ABCDE1234F.';
   }
+  if(type === 'Aadhaar' && !/^[0-9]{12}$/.test(v)){
+    return 'An Aadhaar Number should be 12 digits.';
+  }
+  if(type === 'Passport' && !/^[A-Z][0-9]{7}$/.test(v)){
+    return 'An Indian passport number is 1 letter followed by 7 digits — for example, A1234567.';
+  }
+  if(type === 'VoterID' && !/^[A-Z]{3}[0-9]{7}$/.test(v)){
+    return 'An Electoral Photo ID (Voter ID) is 3 letters followed by 7 digits — for example, ABC1234567.';
+  }
+  if((type === 'TIN' || type === 'DrivingLicense' || type === 'RationCard') && v.length < 4){
+    return 'Please enter a valid ' + idTypeLabels[type] + '.';
+  }
+  return null;
 }
 
 function selectHeroAmt(btn, amt){
@@ -3474,7 +3525,9 @@ async function handleDonate(){
   const amount    = parseFloat(document.getElementById('donate-amount').value);
   const purpose   = document.getElementById('donate-purpose').value;
   const recurring = document.getElementById('donate-recurring').value;
-  const pan       = document.getElementById('donate-pan').value.trim();
+  const wants80G  = document.getElementById('donate-80g').value;
+  const idType    = document.getElementById('donate-id-type').value;
+  const idNumber  = document.getElementById('donate-id-number').value.trim();
   const btn       = document.getElementById('donate-submit-btn');
 
   if(!name || !email || !mobile){
@@ -3485,14 +3538,16 @@ async function handleDonate(){
     showSiteModal({ type:'warn', title:'Invalid Amount', message:'Please enter a valid donation amount (minimum ₹1).' });
     return;
   }
-  if(amount > 2000 && !pan){
-    showSiteModal({ type:'warn', title:'PAN Required', message:'PAN number is required for donations above ₹2,000, as per Income Tax rules for 80G receipts.', onClose:()=>document.getElementById('donate-pan').focus() });
-    return;
-  }
-  const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
-  if(pan && !panPattern.test(pan)){
-    showSiteModal({ type:'warn', title:'PAN Format Looks Off', message:'A PAN is 10 characters: 5 letters, 4 numbers, then 1 letter — for example, ABCDE1234F.', onClose:()=>document.getElementById('donate-pan').focus() });
-    return;
+  if(wants80G === 'Yes'){
+    if(!idNumber){
+      showSiteModal({ type:'warn', title:'ID Required for 80G Receipt', message:'Please enter your ' + idTypeLabels[idType] + ' — an 80G receipt can only be issued when a valid ID is provided.', onClose:()=>document.getElementById('donate-id-number').focus() });
+      return;
+    }
+    const idError = validateIdNumber(idType, idNumber);
+    if(idError){
+      showSiteModal({ type:'warn', title:'ID Format Looks Off', message: idError, onClose:()=>document.getElementById('donate-id-number').focus() });
+      return;
+    }
   }
 
   const originalBtnText = btn.textContent;
@@ -3539,7 +3594,9 @@ async function handleDonate(){
               donor_name: name,
               donor_email: email,
               donor_mobile: mobile,
-              donor_pan: pan,
+              wants_80g_receipt: wants80G,
+              id_type: wants80G === 'Yes' ? idTypeLabels[idType] : '',
+              id_number: wants80G === 'Yes' ? idNumber : '',
               amount: amount,
               purpose: purpose,
               recurring: recurring
@@ -3548,7 +3605,7 @@ async function handleDonate(){
           const verifyData = await verifyRes.json();
 
           if(verifyRes.ok && verifyData.success){
-            showSiteModal({ type:'success', title:'Thank You for Your Generosity', message:'Your donation of ₹' + amount + ' has been received. A confirmation will be sent to ' + email + '.', buttonText:'Done', onClose:()=>{ document.getElementById('donate-name').value=''; document.getElementById('donate-email').value=''; document.getElementById('donate-mobile').value=''; document.getElementById('donate-pan').value=''; } });
+            showSiteModal({ type:'success', title:'Thank You for Your Generosity', message:'Your donation of ₹' + amount + ' has been received. A confirmation will be sent to ' + email + '.', buttonText:'Done', onClose:()=>{ document.getElementById('donate-name').value=''; document.getElementById('donate-email').value=''; document.getElementById('donate-mobile').value=''; document.getElementById('donate-80g').value='No'; document.getElementById('donate-id-number').value=''; toggle80GFields(); } });
           } else {
             showSiteModal({ type:'error', title:'Payment Received — Verifying', message:'We received your payment but could not verify it automatically. Please contact support@naintaara.ngo with your payment ID: ' + response.razorpay_payment_id });
           }

@@ -61,7 +61,9 @@ module.exports = async (req, res) => {
       donor_name,
       donor_email,
       donor_mobile,
-      donor_pan,
+      wants_80g_receipt,
+      id_type,
+      id_number,
       amount,
       purpose,
       recurring,
@@ -96,7 +98,10 @@ module.exports = async (req, res) => {
     const safeName = escapeHtml(donor_name) || "N/A";
     const safeEmail = escapeHtml(donor_email) || "N/A";
     const safeMobile = escapeHtml(donor_mobile) || "N/A";
-    const safePan = escapeHtml(donor_pan) || "Not provided";
+    const wants80G = wants_80g_receipt === "Yes";
+    const safeWants80G = wants80G ? "Yes" : "No";
+    const safeIdType = wants80G ? (escapeHtml(id_type) || "Not specified") : "—";
+    const safeIdNumber = wants80G ? (escapeHtml(id_number) || "Not provided") : "—";
     const safePurpose = escapeHtml(purpose) || "Where Needed Most";
     const safeRecurring = escapeHtml(recurring) || "One-time Donation";
     const safeAmount = amount ? `₹${amount}` : "N/A";
@@ -105,6 +110,9 @@ module.exports = async (req, res) => {
     const LOGO_URL = "https://res.cloudinary.com/dajekho84/image/upload/v1780296549/3cc8f12c-b8af-4915-b31b-cb36ecdff172_removalai_preview_olxguq.png";
     const BRAND_ORANGE = "#C05A18";
     const BRAND_DARK = "#1a1208";
+    const receiptNote = wants80G
+      ? `Your <strong>80G tax-exemption receipt</strong> will be issued after the financial year ends and sent to this email address, using the ${safeIdType} on record with this donation.`
+      : `You chose not to request an 80G tax receipt for this donation. If you'd like one, write to us at <a href="mailto:support@naintaara.ngo" style="color:${BRAND_ORANGE};">support@naintaara.ngo</a> with a valid ID before the financial year ends.`;
 
     const adminHtml = `
     <div style="background:#f4f1ea;padding:32px 16px;font-family:'Helvetica Neue',Arial,sans-serif;">
@@ -121,7 +129,9 @@ module.exports = async (req, res) => {
             <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Mobile</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safeMobile}</td></tr>
             <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Purpose</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safePurpose}</td></tr>
             <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Donation Type</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safeRecurring}</td></tr>
-            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">PAN</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safePan}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">80G Receipt Requested</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-weight:600;">${safeWants80G}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">ID Type</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;">${safeIdType}</td></tr>
+            <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">ID Number</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-family:monospace;">${safeIdNumber}</td></tr>
             <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Order ID</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-family:monospace;font-size:12px;">${escapeHtml(razorpay_order_id)}</td></tr>
             <tr><td style="padding:8px 0;border-bottom:1px solid #f0ece0;color:#8a7d68;">Payment ID</td><td style="padding:8px 0;border-bottom:1px solid #f0ece0;text-align:right;font-family:monospace;font-size:12px;">${escapeHtml(razorpay_payment_id)}</td></tr>
             <tr><td style="padding:8px 0;color:#8a7d68;">Date/Time (IST)</td><td style="padding:8px 0;text-align:right;">${timestamp}</td></tr>
@@ -153,8 +163,7 @@ module.exports = async (req, res) => {
             </table>
           </div>
           <p style="margin:0 0 28px;color:#4a4136;font-size:14px;line-height:1.7;">
-            Your <strong>80G tax-exemption receipt</strong> will be issued after the financial year ends and
-            sent to this email address.
+            ${receiptNote}
           </p>
           <p style="margin:0;color:${BRAND_DARK};font-size:15px;">With gratitude,<br><strong>Nain Taara Welfare Foundation</strong></p>
         </div>
