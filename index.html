@@ -52,7 +52,9 @@
     .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 35%, rgba(0,0,0,0.65) 100%); z-index: 2; border-radius: inherit; }
 
     /* NAVBAR */
-    .navbar { position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 10;
+    #about, #impact, #gallery, #donate, #contact, #faq { scroll-margin-top: 80px; }
+    @media(max-width:767px){ #about, #impact, #gallery, #donate, #contact, #faq { scroll-margin-top: 68px; } }
+    .navbar { position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 1000;
       background: rgba(255,255,255,0.95); border-radius: 0 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(26,18,8,0.08);
       padding: 0.5rem 1.2rem; display: flex; align-items: center; gap: 1.2rem; backdrop-filter: blur(8px); white-space: nowrap; }
     @media(min-width:768px){ .navbar { padding: 0.65rem 2rem; gap: 2.5rem; border-radius: 0 0 2rem 2rem; } }
